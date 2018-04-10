@@ -1,0 +1,22 @@
+Package: OxfordApi
+Type: Package
+Title: Methods for Using the Oxford Dictionaries API
+Version: 0.0.1
+Authors@R: c(
+    person("Benjamin", "Nutter", email = "benjamin.nutter@gmail.com", 
+           role = c("aut", "ctb", "cre")))
+Maintainer: Benjamin Nutter <benjamin.nutter@gmail.com>
+Description: The Oxford Dictionaries API provides access words, definitions,
+  and usage of the English language.  Functions in this package provide 
+  a simplified and consistent interface to make use of the API.
+License: MIT + FILE
+Depends:
+    R (>= 3.0.0)
+Imports:
+    checkmate,
+    httr
+LazyLoad: yes
+URL: https://github.com/nutterb/OxfordApi,
+    https://developer.oxforddictionaries.com/
+BugReports: https://github.com/nutterb/OxfordApi/issues
+RoxygenNote: 6.0.1
