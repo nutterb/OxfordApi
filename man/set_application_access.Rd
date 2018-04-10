@@ -37,6 +37,8 @@ get_application_language()
 
 \item{url_base}{\code{character(1)}. Sets the base of the URL to the 
 Oxford Dictionaries API.}
+
+\item{language}{\code{character(1)}. The desired language for API calls.}
 }
 \description{
 Access to the Oxford Dictionaries API requires that 1) the 

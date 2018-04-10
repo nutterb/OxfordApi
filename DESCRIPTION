@@ -9,12 +9,17 @@ Maintainer: Benjamin Nutter <benjamin.nutter@gmail.com>
 Description: The Oxford Dictionaries API provides access words, definitions,
   and usage of the English language.  Functions in this package provide 
   a simplified and consistent interface to make use of the API.
-License: MIT + FILE
+License: MIT + file LICENSE
 Depends:
     R (>= 3.0.0)
 Imports:
     checkmate,
-    httr
+    httr,
+    rjson
+Suggests:
+    knitr,
+    testthat
+VignetteBuilder: knitr
 LazyLoad: yes
 URL: https://github.com/nutterb/OxfordApi,
     https://developer.oxforddictionaries.com/

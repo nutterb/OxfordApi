@@ -9,6 +9,7 @@
 #'   Oxford Dictionaries API.
 #' @param app_id \code{character(1)}. The user's application ID.
 #' @param app_key \code{character(1)}. The user's application key.
+#' @param language \code{character(1)}. The desired language for API calls.
 #' 
 #' @section Functional Requirements:
 #' 
