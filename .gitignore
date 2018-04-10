@@ -17,6 +17,7 @@
 # RStudio files
 .Rproj.user/
 ^.*\.Rproj$
+OxfordApi.Rproj
 
 # produced vignettes
 vignettes/*.html
@@ -36,3 +37,4 @@ vignettes/*.pdf
 
 # Private application keys
 OxfordApiKeys.Rdata
+packageBuilding.R

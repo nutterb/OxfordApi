@@ -85,5 +85,7 @@ get_oxford_registers <- function(app_id = getOption("oxford_api_app_id"),
   response <- rjson::fromJSON(response)
   
   response <- unname(unlist(response[["results"]]))
-  sub("%27", "'", response)
+  vapply(X = response,
+         FUN = utils::URLdecode,
+         FUN.VALUE = character(1))
 }
