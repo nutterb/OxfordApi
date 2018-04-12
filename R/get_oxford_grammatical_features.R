@@ -45,31 +45,10 @@ get_oxford_grammatical_features <- function(app_id = getOption("oxford_api_app_i
 {
   coll <- checkmate::makeAssertCollection()
   
-  checkmate::assert_character(x = app_id,
-                              len = 1,
-                              add = coll)
-  
-  if (any(is.null(app_id)))
-  {
-    coll$push("`app_id` is set to NULL. Consider using `set_application_access`")
-  }
-  
-  checkmate::assert_character(x = app_key,
-                              len = 1,
-                              add = coll)
-  
-  if (is.null(app_key))
-  {
-    coll$push("`app_key` is set to NULL. Consider using `set_application_access`")
-  }
-
-  language <- 
-    checkmate::matchArg(x = language,
-                        choices = oxford_languages,
-                        add = coll)
-  
-  checkmate::assert_character(x = url_base,
-                              len = 1,
+  language <- validate_params(app_id = app_id,
+                              app_key = app_key,
+                              url_base = url_base,
+                              language = language,
                               add = coll)
   
   checkmate::reportAssertions(coll)

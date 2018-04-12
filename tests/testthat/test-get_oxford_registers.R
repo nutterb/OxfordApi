@@ -1,18 +1,4 @@
-context("get_oxford_regions.R")
-
-# This file must be kept private to prevent access to my app_id and key.
-
-if (file.exists("/home/benjamin")) {
-  load("/home/benjamin/GitHub/OxfordApi/OxfordApiKeys.Rdata")
-} else{
-  app_id <- "12345678"
-  app_key <- paste0(c(letters, letters[1:6]), collapse = "")
-}
-
-set_application_language("en")
-set_application_access(app_id = app_id,
-                       app_key = app_key)
-set_oxford_url_base("https://od-api.oxforddictionaries.com/api/v1")
+context("get_oxford_registers.R")
 
 # Functional Requirement 1 ------------------------------------------
 
@@ -21,7 +7,18 @@ test_that(
   {
     skip_on_cran()
     expect_equal(
-      is.data.frame(get_oxford_regions()),
+      is.character(get_oxford_registers()),
+      TRUE
+    )
+  }
+)
+
+test_that(
+  "Return a character vector for bilingual language",
+  {
+    skip_on_cran()
+    expect_equal(
+      is.character(get_oxford_registers(target_language = "es")),
       TRUE
     )
   }
@@ -34,7 +31,7 @@ test_that(
   {
     skip_on_cran()
     expect_error(
-      get_oxford_regions(app_id = "bad_id12")
+      get_oxford_registers(app_id = invalid_app_id)
     )
   }
 )
@@ -46,7 +43,7 @@ test_that(
   {
     skip_on_cran()
     expect_error(
-      get_oxford_regions(app_id = 123)
+      get_oxford_registers(app_id = 123)
     )
   }
 )
@@ -56,7 +53,7 @@ test_that(
   {
     skip_on_cran()
     expect_error(
-      get_oxford_regions(app_id = rep(get_application_id(), 2))
+      get_oxford_registers(app_id = rep(get_application_id(), 2))
     )
   }
 )
@@ -68,7 +65,7 @@ test_that(
   {
     skip_on_cran()
     expect_error(
-      get_oxford_regions(app_id = NULL)
+      get_oxford_registers(app_id = NULL)
     )
   }
 )
@@ -80,7 +77,7 @@ test_that(
   {
     skip_on_cran()
     expect_error(
-      get_oxford_regions(app_key = 123)
+      get_oxford_registers(app_key = 123)
     )
   }
 )
@@ -90,7 +87,7 @@ test_that(
   {
     skip_on_cran()
     expect_error(
-      get_oxford_regions(app_key = rep(get_application_key(), 2))
+      get_oxford_registers(app_key = rep(get_application_key(), 2))
     )
   }
 )
@@ -102,7 +99,7 @@ test_that(
   {
     skip_on_cran()
     expect_error(
-      get_oxford_regions(app_key = NULL)
+      get_oxford_registers(app_key = NULL)
     )
   }
 )
@@ -114,7 +111,7 @@ test_that(
   {
     skip_on_cran()
     expect_error(
-      get_oxford_regions(language = 123)
+      get_oxford_registers(language = 123)
     )
   }
 )
@@ -124,7 +121,7 @@ test_that(
   {
     skip_on_cran()
     expect_error(
-      get_oxford_regions(language = rep(get_application_language(), 2))
+      get_oxford_registers(language = rep(get_application_language(), 2))
     )
   }
 )
@@ -136,7 +133,7 @@ test_that(
   {
     skip_on_cran()
     expect_error(
-      get_oxford_regions(url_base = 123)
+      get_oxford_registers(url_base = 123)
     )
   }
 )
@@ -146,7 +143,7 @@ test_that(
   {
     skip_on_cran()
     expect_error(
-      get_oxford_regions(url_base = rep(get_oxford_url_base(), 2))
+      get_oxford_registers(url_base = rep(get_oxford_url_base(), 2))
     )
   }
 )

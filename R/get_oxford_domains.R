@@ -4,6 +4,8 @@
 #' @description Returns a list of the available domains for a given 
 #'   monolingual language dataset.
 #'   
+#' @param target_language An optional \code{character(1)}. When given, 
+#'   the domains are returned for a bilingual language dataset.  
 #' @param app_id \code{character(1)}. The user's application ID.
 #' @param app_key \code{character(1)}. The user's application key.
 #' @param language \code{character(1)}. The language for which to look up 
@@ -20,8 +22,11 @@
 #'  \item Cast an error if \code{app_id} is \code{NULL}.
 #'  \item Cast an error if \code{app_key} is not \code{character(1)}.
 #'  \item Cast an error if \code{app_key} is \code{NULL}.
-#'  \item Cast an error if \code{language} is not \code{character(1)}.
+#'  \item Cast an error if \code{language} is not one of 
+#'    \code{oxford_languages}.
 #'  \item Cast an error if \code{url_base} is not \code{character(1)}.
+#'  \item Cast an error if \code{target_language} is not \code{NULL} and is
+#'    not one of \code{oxford_languages}.
 #' }
 #' 
 #' @examples 
@@ -33,45 +38,39 @@
 #' 
 #' @export
 
-get_oxford_domains <- function(app_id = getOption("oxford_api_app_id"),
+get_oxford_domains <- function(target_language = NULL, 
+                               app_id = getOption("oxford_api_app_id"),
                                app_key = getOption("oxford_api_app_key"),
                                language = getOption("oxford_api_language"),
                                url_base = getOption("oxford_api_url_base"))
 {
   coll <- checkmate::makeAssertCollection()
   
-  checkmate::assert_character(x = app_id,
-                              len = 1,
-                              add = coll)
-  
-  if (any(is.null(app_id)))
+  if (!is.null(target_language))
   {
-    coll$push("`app_id` is set to NULL. Consider using `set_application_access`")
+    target_language <- checkmate::matchArg(x = target_language,
+                                           choices = oxford_languages,
+                                           add = coll)
   }
   
-  checkmate::assert_character(x = app_key,
-                              len = 1,
-                              add = coll)
-  
-  if (is.null(app_key))
-  {
-    coll$push("`app_key` is set to NULL. Consider using `set_application_access`")
-  }
-
-  language <- 
-    checkmate::matchArg(x = language,
-                        choices = oxford_languages,
-                        add = coll)
-  
-  checkmate::assert_character(x = url_base,
-                              len = 1,
+  language <- validate_params(app_id = app_id,
+                              app_key = app_key,
+                              url_base = url_base,
+                              language = language,
                               add = coll)
   
   checkmate::reportAssertions(coll)
   
-  url <- sprintf("%s/domains/%s",
+  target_language <- 
+    if (is.null(target_language))
+      ""
+    else
+      paste0("/", target_language)
+  
+  url <- sprintf("%s/domains/%s%s",
                  url_base,
-                 language)
+                 language,
+                 target_language)
   
   response <- 
     httr::GET(url = url,

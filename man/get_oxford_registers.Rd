@@ -4,12 +4,16 @@
 \alias{get_oxford_registers}
 \title{Get Domains for a Chosen Language}
 \usage{
-get_oxford_registers(app_id = getOption("oxford_api_app_id"),
+get_oxford_registers(target_language = NULL,
+  app_id = getOption("oxford_api_app_id"),
   app_key = getOption("oxford_api_app_key"),
   language = getOption("oxford_api_language"),
   url_base = getOption("oxford_api_url_base"))
 }
 \arguments{
+\item{target_language}{An optional \code{character(1)}. When given, 
+the domains are returned for a bilingual language dataset.}
+
 \item{app_id}{\code{character(1)}. The user's application ID.}
 
 \item{app_key}{\code{character(1)}. The user's application key.}
@@ -36,8 +40,11 @@ Returns the lexical categories available for the
  \item Cast an error if \code{app_id} is \code{NULL}.
  \item Cast an error if \code{app_key} is not \code{character(1)}.
  \item Cast an error if \code{app_key} is \code{NULL}.
- \item Cast an error if \code{language} is not \code{character(1)}.
+ \item Cast an error if \code{language} is not one of 
+   \code{oxford_languages}.
  \item Cast an error if \code{url_base} is not \code{character(1)}.
+ \item Cast an error if \code{target_language} is not \code{NULL} and is
+   not one of \code{oxford_languages}.
 }
 }
 

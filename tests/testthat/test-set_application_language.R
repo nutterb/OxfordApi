@@ -32,3 +32,8 @@ test_that(
     )
   }
 )
+
+set_application_language("en")
+set_application_access(app_id = app_id,
+                       app_key = app_key)
+set_oxford_url_base("https://od-api.oxforddictionaries.com/api/v1")

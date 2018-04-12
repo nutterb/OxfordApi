@@ -1,4 +1,4 @@
-context("get_oxford_domains.R")
+context("get_oxford_regions.R")
 
 # Functional Requirement 1 ------------------------------------------
 
@@ -7,18 +7,7 @@ test_that(
   {
     skip_on_cran()
     expect_equal(
-      is.character(get_oxford_domains()),
-      TRUE
-    )
-  }
-)
-
-test_that(
-  "Return a character vector for bilingual dictionaries",
-  {
-    skip_on_cran()
-    expect_equal(
-      is.character(get_oxford_domains(target_language = "es")),
+      is.data.frame(get_oxford_regions()),
       TRUE
     )
   }
@@ -31,7 +20,7 @@ test_that(
   {
     skip_on_cran()
     expect_error(
-      get_oxford_domains(app_id = invalid_app_id)
+      get_oxford_regions(app_id = invalid_app_id)
     )
   }
 )
@@ -43,7 +32,7 @@ test_that(
   {
     skip_on_cran()
     expect_error(
-      get_oxford_domains(app_id = 123)
+      get_oxford_regions(app_id = 123)
     )
   }
 )
@@ -53,7 +42,7 @@ test_that(
   {
     skip_on_cran()
     expect_error(
-      get_oxford_domains(app_id = rep(get_application_id(), 2))
+      get_oxford_regions(app_id = rep(get_application_id(), 2))
     )
   }
 )
@@ -65,7 +54,7 @@ test_that(
   {
     skip_on_cran()
     expect_error(
-      get_oxford_domains(app_id = NULL)
+      get_oxford_regions(app_id = NULL)
     )
   }
 )
@@ -77,7 +66,7 @@ test_that(
   {
     skip_on_cran()
     expect_error(
-      get_oxford_domains(app_key = invalid_app_key)
+      get_oxford_regions(app_key = 123)
     )
   }
 )
@@ -87,7 +76,7 @@ test_that(
   {
     skip_on_cran()
     expect_error(
-      get_oxford_domains(app_key = rep(get_application_key(), 2))
+      get_oxford_regions(app_key = rep(get_application_key(), 2))
     )
   }
 )
@@ -99,7 +88,7 @@ test_that(
   {
     skip_on_cran()
     expect_error(
-      get_oxford_domains(app_key = NULL)
+      get_oxford_regions(app_key = NULL)
     )
   }
 )
@@ -111,7 +100,7 @@ test_that(
   {
     skip_on_cran()
     expect_error(
-      get_oxford_domains(language = 123)
+      get_oxford_regions(language = 123)
     )
   }
 )
@@ -121,7 +110,7 @@ test_that(
   {
     skip_on_cran()
     expect_error(
-      get_oxford_domains(language = rep(get_application_language(), 2))
+      get_oxford_regions(language = rep(get_application_language(), 2))
     )
   }
 )
@@ -133,7 +122,7 @@ test_that(
   {
     skip_on_cran()
     expect_error(
-      get_oxford_domains(url_base = 123)
+      get_oxford_regions(url_base = 123)
     )
   }
 )
@@ -143,7 +132,7 @@ test_that(
   {
     skip_on_cran()
     expect_error(
-      get_oxford_domains(url_base = rep(get_oxford_url_base(), 2))
+      get_oxford_regions(url_base = rep(get_oxford_url_base(), 2))
     )
   }
 )

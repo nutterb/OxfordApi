@@ -1,19 +1,5 @@
 context("get_oxford_wordlist.R")
 
-# This file must be kept private to prevent access to my app_id and key.
-
-if (file.exists("/home/benjamin")) {
-  load("/home/benjamin/GitHub/OxfordApi/OxfordApiKeys.Rdata")
-} else{
-  app_id <- "12345678"
-  app_key <- paste0(c(letters, letters[1:6]), collapse = "")
-}
-
-set_application_language("en")
-set_application_access(app_id = app_id,
-                       app_key = app_key)
-set_oxford_url_base("https://od-api.oxforddictionaries.com/api/v1")
-
 # Functional Requirement 1 ------------------------------------------
 
 test_that(
@@ -46,7 +32,7 @@ test_that(
   {
     skip_on_cran()
     expect_error(
-      get_oxford_wordlist(app_id = "bad_id12")
+      get_oxford_wordlist(app_id = invalid_app_id)
     )
   }
 )
